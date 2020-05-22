@@ -66,8 +66,12 @@ textarea{
 }
 
 .fas {
-  padding-top: 30px;
-  padding-left: 35px;
+  padding: 30px;
+  width: 100%;
+}
+
+i {
+  text-align: center;
 }
 
 .saveBtn i:hover {
