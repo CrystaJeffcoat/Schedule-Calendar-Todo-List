@@ -11,6 +11,7 @@ textarea{
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+  padding-top: 30px;
 }
 
 .jumbotron {
@@ -40,6 +41,8 @@ textarea{
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  text-align: center;
+  padding-top: 30px;
 }
 
 .past {

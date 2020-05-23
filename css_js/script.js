@@ -114,6 +114,7 @@ function storeUserInput(y, z) {
 }
 
 // render local storage when page opens
+getUserInput();
 function getUserInput() {
 
     for (var i = 9; i < 18; i++) {
@@ -125,8 +126,11 @@ function getUserInput() {
         console.log(indexVal);
 
         if (indexVal = i) {
-            index.textContent = k;
+            if (k !== null) {
+                index.textContent = k;
+            }else {
+                index.textContent = "---available---"
+            }
         }
     }
 };
-getUserInput();
