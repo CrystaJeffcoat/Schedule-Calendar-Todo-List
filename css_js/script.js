@@ -4,11 +4,10 @@ var date = moment().format('dddd, LL');
 currentDay.text(date);
 
 var textArea = $(".textArea");
-textAreaVal = parseInt(textArea.attr("value"))
-console.log(textArea.attr("value"));
+textAreaVal = parseInt(textArea.attr("value"));
 
 // append timeblocks for standard business hours (9am-5pm)
-// function will append timeblock elements 8 times for a total of 9
+// clone timeblock elements from index file
 clone();
 function clone() {
 
@@ -19,67 +18,35 @@ function clone() {
 
         // set attribute of textarea to value = i
         textArea.attr("value", i);
-        console.log(textArea.attr("value"));
-        console.log(typeof textAreaVal);
        
     }
 };
 
-// switch/case function will add text to hour div
+// add text to hour div
 setHour();
 function setHour() {
     var hour = $(".hour")
+    var hoursArr = [
+        "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"
+    ]
     for (var i = 0; i < hour.length; i++) {
-        hour[i].textContent = i
-    
-        switch(i) {
-            case 0:
-                hour[0].textContent = "9AM";
-                break;
-            case 1:
-                hour[1].textContent = "10AM";
-                break;
-            case 2:
-                hour[2].textContent = "11AM";
-                break;
-            case 3:
-                hour[3].textContent = "12PM";
-                break;
-            case 4:
-                hour[4].textContent = "1PM";
-                break;
-            case 5:
-                hour[5].textContent = "2PM";
-                break;
-            case 6:
-                hour[6].textContent = "3PM";
-                break;
-            case 7:
-                hour[7].textContent = "4PM";
-                break;
-            case 8:
-                hour[8].textContent = "5PM";
-                break;
-            default:
-                break;
-        }//use array for times ***************
-
+        hour[i].textContent = hoursArr[i]
     }
 };
 
 // function to get current time
 var currentHour = moment().get('h');
-console.log(currentHour);
+console.log("current hour: " + currentHour);
 
-getValue();
+
 // gets value from each row to determine which tasks are past, present, and future
+getValue();
 function getValue() {
 
     for (var i = 0; i < 9; i++) {
 
         var x = $(".row")[i].children[1];
         var y = parseInt(x.getAttribute("value"));
-        console.log(y);
 
         if (y > currentHour) {
             $(x).addClass("future");
@@ -97,12 +64,12 @@ function getValue() {
 
 // event listener to saveBtn
 $(".saveBtn").on("click", function() {
+
     x = (event.target.parentElement)
+
     var y = x.previousElementSibling
-    console.log(y);
     var z = y.value
-    console.log(z);
-    // store in local storage
+    
     storeUserInput(y, z);
 })
 
@@ -121,15 +88,16 @@ function getUserInput() {
         k = localStorage.getItem(i);
         
         var index = $("textarea")[i - 9]
-        console.log(index);
         var indexVal = index.getAttribute("value");
-        console.log(indexVal);
 
         if (indexVal = i) {
-            if (k !== null) {
+            if (k !== null && k !== "") {
                 index.textContent = k;
             }else {
                 index.textContent = "---available---"
+                $(index).attr(
+                    "style", "text-align: center; color: rgb(92, 86, 86);"
+                );
             }
         }
     }
