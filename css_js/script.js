@@ -62,7 +62,7 @@ function setHour() {
                 break;
             default:
                 break;
-        }
+        }//use array for times ***************
 
     }
 };
@@ -72,6 +72,7 @@ var currentHour = moment().get('h');
 console.log(currentHour);
 
 getValue();
+// gets value from each row to determine which tasks are past, present, and future
 function getValue() {
 
     for (var i = 0; i < 9; i++) {
@@ -93,3 +94,39 @@ function getValue() {
     }
 
 }
+
+// event listener to saveBtn
+$(".saveBtn").on("click", function() {
+    x = (event.target.parentElement)
+    var y = x.previousElementSibling
+    console.log(y);
+    var z = y.value
+    console.log(z);
+    // store in local storage
+    storeUserInput(y, z);
+})
+
+// local storage function
+function storeUserInput(y, z) {
+    x = y.getAttribute("value");
+    console.log(x);
+    localStorage.setItem(x, z);
+}
+
+// render local storage when page opens
+function getUserInput() {
+
+    for (var i = 9; i < 18; i++) {
+        k = localStorage.getItem(i);
+        
+        var index = $("textarea")[i - 9]
+        console.log(index);
+        var indexVal = index.getAttribute("value");
+        console.log(indexVal);
+
+        if (indexVal = i) {
+            index.textContent = k;
+        }
+    }
+};
+getUserInput();
